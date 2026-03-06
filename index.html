@@ -7,7 +7,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script>
   // Initialize EmailJS
-  emailjs.init("FKBPoP0De3l2HxhaD");
+  emailjs.init("9L6-yT9SLTFOwAp5_");
 
   function sendEmail() {
     const templateParams = {
@@ -16,7 +16,7 @@
       amount: document.getElementById('amount').value
     };
 
-    emailjs.send("service_jk0q6ci", "template_zih0t27", templateParams)
+    emailjs.send("service_o4xi661", "template_3zzittw", templateParams)
       .then(() => alert("Email sent successfully!"))
       .catch(err => {
         console.error("EmailJS Error:", err);
