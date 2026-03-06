@@ -1,53 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Send Email - Admin Panel</title>
+
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
 <script>
-  // Initialize EmailJS
-  emailjs.init("9L6-yT9SLTFOwAp5_");
 
-  function sendEmail() {
-    const templateParams = {
-      to_email: document.getElementById('to_email').value,   // recipient
-      user_name: document.getElementById('user_name').value,
-      amount: document.getElementById('amount').value,
-      batch: document.getElementById('batch').value         // NEW: transaction batch
-    };
+emailjs.init("9L6-yT9SLTFOwAp5_");
 
-    emailjs.send("service_o4xi661", "template_3zzittw", templateParams)
-      .then(() => alert("Email sent successfully!"))
-      .catch(err => {
-        console.error("EmailJS Error:", err);
-        alert("Failed to send email. Check console for details.");
-      });
-  }
+function sendEmail(){
+
+const templateParams = {
+
+to_email: document.getElementById("to_email").value,
+user_name: document.getElementById("user_name").value,
+email_body: document.getElementById("email_body").value,
+batch: document.getElementById("batch").value
+
+};
+
+emailjs.send("service_o4xi661","template_3zzittw",templateParams)
+
+.then(function(){
+alert("Email sent successfully!");
+})
+
+.catch(function(error){
+console.log(error);
+alert("Email failed to send");
+});
+
+}
+
 </script>
+
 <style>
-  body { font-family: Arial, sans-serif; padding: 30px; background: #f5f8fa; }
-  label { display:block; margin-top:15px; font-weight:bold; }
-  input { width: 100%; padding:8px; margin-top:5px; border-radius:4px; border:1px solid #ccc; }
-  button { margin-top:20px; padding:12px 20px; font-size:16px; background:#34aadc; color:#fff; border:none; border-radius:5px; cursor:pointer; }
+
+body{
+font-family: Arial;
+padding:30px;
+background:#f5f8fa;
+}
+
+label{
+display:block;
+margin-top:15px;
+font-weight:bold;
+}
+
+input, textarea{
+width:100%;
+padding:10px;
+margin-top:5px;
+border-radius:4px;
+border:1px solid #ccc;
+}
+
+textarea{
+height:120px;
+}
+
+button{
+margin-top:20px;
+padding:12px 20px;
+font-size:16px;
+background:#34aadc;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
 </style>
+
 </head>
+
 <body>
 
 <h2>Send Withdrawal Email</h2>
 
-<!-- Admin fills only these fields -->
-<label for="to_email">Recipient Email</label>
-<input type="email" id="to_email" placeholder="Enter recipient email">
+<label>Recipient Email</label>
+<input type="email" id="to_email">
 
-<label for="user_name">User Name</label>
-<input type="text" id="user_name" placeholder="Enter user name">
+<label>User Name</label>
+<input type="text" id="user_name">
 
-<label for="amount">Amount</label>
-<input type="text" id="amount" placeholder="Enter amount, e.g. $20000 worth of Bitcoin">
+<label>Main Email Message</label>
+<textarea id="email_body" placeholder="Type the full email message including amount"></textarea>
 
-<label for="batch">Transaction Batch</label>
-<input type="text" id="batch" placeholder="Enter transaction batch, e.g. M_u01g">
+<label>Transaction Batch</label>
+<input type="text" id="batch">
 
 <button onclick="sendEmail()">Send Email</button>
 
