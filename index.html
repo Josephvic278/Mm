@@ -13,7 +13,8 @@
     const templateParams = {
       to_email: document.getElementById('to_email').value,   // recipient
       user_name: document.getElementById('user_name').value,
-      amount: document.getElementById('amount').value
+      amount: document.getElementById('amount').value,
+      batch: document.getElementById('batch').value         // NEW: transaction batch
     };
 
     emailjs.send("service_o4xi661", "template_3zzittw", templateParams)
@@ -44,6 +45,9 @@
 
 <label for="amount">Amount</label>
 <input type="text" id="amount" placeholder="Enter amount, e.g. $20000 worth of Bitcoin">
+
+<label for="batch">Transaction Batch</label>
+<input type="text" id="batch" placeholder="Enter transaction batch, e.g. M_u01g">
 
 <button onclick="sendEmail()">Send Email</button>
 
