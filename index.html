@@ -1,40 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Email Sender - Admin Panel</title>
+<title>Send Email</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
 <script>
 
-// Initialize EmailJS
-emailjs.init("9L6-yT9SLTFOwAp5_");
+emailjs.init("FKBPoP0De3l2HxhaD");
 
 function sendEmail(){
 
-const templateParams = {
+const image = document.getElementById("image_url").value.trim();
+const doc = document.getElementById("doc_link").value.trim();
+
+const params = {
 
 to_email: document.getElementById("to_email").value,
 user_name: document.getElementById("user_name").value,
 email_body: document.getElementById("email_body").value,
-subject: document.getElementById("subject").value
+
+image_url: image ? image : "",
+doc_link: doc ? doc : ""
 
 };
 
-emailjs.send("service_vl0ryh4","template_3zzittw",templateParams)
+emailjs.send("service_jk0q6ci","template_zih0t27",params)
 
-.then(function(){
-alert("Email sent successfully!");
-})
+.then(()=>alert("Email sent successfully!"))
 
-.catch(function(error){
-console.log(error);
-alert("Email failed to send");
+.catch(err=>{
+console.log(err);
+alert("Failed to send email");
 });
 
 }
@@ -44,7 +43,7 @@ alert("Email failed to send");
 <style>
 
 body{
-font-family: Arial, sans-serif;
+font-family:Arial;
 padding:30px;
 background:#f5f8fa;
 }
@@ -54,11 +53,7 @@ max-width:500px;
 background:white;
 padding:25px;
 border-radius:6px;
-box-shadow:0 2px 8px rgba(0,0,0,0.05);
-}
-
-h2{
-margin-bottom:20px;
+box-shadow:0 2px 10px rgba(0,0,0,0.05);
 }
 
 label{
@@ -67,23 +62,21 @@ margin-top:15px;
 font-weight:bold;
 }
 
-input, textarea{
+input,textarea{
 width:100%;
 padding:10px;
 margin-top:5px;
 border-radius:4px;
 border:1px solid #ccc;
-font-size:14px;
 }
 
 textarea{
 height:120px;
-resize:vertical;
 }
 
 button{
 margin-top:20px;
-padding:12px 20px;
+padding:12px;
 font-size:16px;
 background:#34aadc;
 color:white;
@@ -93,31 +86,29 @@ cursor:pointer;
 width:100%;
 }
 
-button:hover{
-background:#2c97c6;
-}
-
 </style>
-
 </head>
 
 <body>
 
 <div class="container">
 
-<h2>Send Withdrawal Email</h2>
-
-<label>Email Subject</label>
-<input type="text" id="subject" placeholder="Enter email subject">
+<h2>Send Email</h2>
 
 <label>Recipient Email</label>
-<input type="email" id="to_email" placeholder="Enter recipient email">
+<input type="email" id="to_email">
 
 <label>User Name</label>
-<input type="text" id="user_name" placeholder="Enter user name">
+<input type="text" id="user_name">
 
-<label>Main Email Message</label>
-<textarea id="email_body" placeholder="Type the full email message including amount"></textarea>
+<label>Email Message</label>
+<textarea id="email_body"></textarea>
+
+<label>Image URL (optional)</label>
+<input type="text" id="image_url" placeholder="https://example.com/image.png">
+
+<label>Document Link (optional)</label>
+<input type="text" id="doc_link" placeholder="https://example.com/document.pdf">
 
 <button onclick="sendEmail()">Send Email</button>
 
